@@ -1,0 +1,29 @@
+$align: left;
+
+@for $i from 1 through 6 {
+  .gap-right-#{$i*5} > :not(:last-child) { margin-right: 5px * $i; }
+  .gap-bottom-#{$i*5} > :not(:last-child) { margin-bottom: 5px * $i; }
+}
+
+.App {
+  text-align: $align;
+}
+
+.App-logo {
+  height: 30vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
