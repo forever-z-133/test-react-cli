@@ -1,13 +1,8 @@
-import React from "react";
-import {
-  HashRouter,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import React, { lazy, Suspense } from "react";
+import { HashRouter, Switch, Route, Link } from "react-router-dom";
 import Home from './routes/Home/index';
-import About from './routes/About/index';
-import Dashboard from './routes/Dashboard/index';
+const About = lazy(() => import('./routes/About/index'));
+const Dashboard = lazy(() => import('./routes/Dashboard/index'));
 
 export default function BasicExample() {
   return (
@@ -26,17 +21,13 @@ export default function BasicExample() {
         </ul>
 
         <hr />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/dashboard">
-            <Dashboard />
-          </Route>
-        </Switch>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/about" component={About} />
+            <Route path="/dashboard" component={Dashboard} />
+          </Switch>
+        </Suspense>
       </div>
     </HashRouter>
   );

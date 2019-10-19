@@ -4,11 +4,7 @@ import Layout from './components/Layout';
 
 function App() {
   return (
-    <Layout header={
-      <p>页首</p>
-    } footer={
-      <p>页尾</p>
-    }>
+    <Layout fixedFooter fixedHeader header={<p>页首</p>} footer={<p>页尾</p>}>
       <Router />
     </Layout>
   );

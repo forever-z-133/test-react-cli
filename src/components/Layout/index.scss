@@ -4,16 +4,9 @@
   bottom: 0;
   left: 0;
   right: 0;
-  display: flex;
-  flex-direction: column;
 
   &>.header,
   &>.footer {
-    flex-shrink: 0;
     box-shadow: 0 0 0 1px #f2f2f2;
-  }
-
-  &>.body {
-    flex-grow: 1;
   }
 }
