@@ -7,6 +7,9 @@ import logo from 'assets/logo.svg';
 import './index.scss';
 
 const Home = observer(() => {
+  const throwError = () => {
+    throw new Error('xx');
+  }
   return (
     <div className="Home">
       <header className="Home-header">
@@ -19,6 +22,9 @@ const Home = observer(() => {
         {app.list.join(',')}
         <p>{app.state}</p>
       </main>
+      <footer>
+        <button onClick={() => throwError()}>直接报错(无法捕捉事件里的报错，好鸡肋)</button>
+      </footer>
     </div>
   );
 })
