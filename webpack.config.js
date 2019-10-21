@@ -1,5 +1,0 @@
-module.export = {
-	output: {
-		publicPath: './'
-	}
-}
