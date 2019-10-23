@@ -1,6 +1,17 @@
 /**
  * 判断数据类型
 */
+function getEnv(href) {
+  var isTest = /localhost|wxxxtsat|192\.168/i.test(href);
+  var isUat = /pstest\./i.test(href);
+  var isPre = /pstest\./i.test(href);
+  var isPrd = /dfth\.com/i.test(href);
+  return { test: isTest, uat: isUat, pre: isPre, prd: isPrd };
+}
+
+/**
+ * 判断数据类型
+*/
 function typeOf(obj) {
   var typeStr = Object.prototype.toString.call(obj).split(" ")[1];
   return typeStr.substr(0, typeStr.length - 1).toLowerCase();
@@ -125,7 +136,7 @@ function countMore(type, options, ...nums) {
 function countPlus(str) {
   var result = str.replace(/\s/g, '');
   // 先递归处理括号内的运算
-  result = result.replace(/\(([^\)]*)\)/g, (match, _str) => countPlus(_str));
+  result = result.replace(/\(([^)]*)\)/g, (match, _str) => countPlus(_str));
   // 先乘除，后加减，用 exec 正则出来一个个计算并替换
   const _numReg = '(-?[0-9]+[\\.\\e]?[0-9]*)';
   ['/*', '+-'].forEach((item) => {
@@ -143,13 +154,13 @@ function countPlus(str) {
 /**
  * json 的深入遍历
 */
-function forEachDeep(json, func, indexs = [], parents = []) {
+function forEachDeep(json, childKey, func, indexs = [], parents = []) {
   json.forEach((item, index) => {
     indexs.push(index);
     parents.push(item);
     func(item, indexs, parents);
-    if (item.child && item.child.length) {
-      forEachDeep(item.child, func, indexs, parents);
+    if (item[childKey] && item[childKey].length) {
+      forEachDeep(item[childKey], childKey, func, indexs, parents);
     }
   });
 }
@@ -164,8 +175,9 @@ function forInDeep(obj, func, map = new WeakMap()) {
       map.set(obj, clone);
       for (let key in obj) {
         let value = obj[key];
-        value = func ? func(key, value, clone) : value;
-        clone[key] = forInDeep(value, map);
+        const temp = func && func(key, value, obj);
+        value = func ? (temp === void 0 ? value : temp) : value;
+        clone[key] = forInDeep(value, func, map);
       }
       return clone;
   } else {
@@ -289,6 +301,7 @@ function useCache(fn) {
 }
 
 export default {
+  getEnv,
   typeOf,
   isType,
   isEmpty,

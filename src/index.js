@@ -6,8 +6,8 @@ import * as serviceWorker from './serviceWorker';
 
 if (process.env.NODE_ENV !== 'production') {
   console.log('测试版');
+  console.log(process.env.REACT_APP_VERSION);
 }
-console.log(process.env.REACT_APP_VERSION);
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
