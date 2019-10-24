@@ -1,8 +1,9 @@
-import { typeOf } from './index'
+import utils from 'utils/index';
+const { typeOf } = utils;
 
 /**
  * 日期转为字符串
-*/
+ */
 function toDate(obj, format = 'yyyy-MM-dd') {
   if (obj instanceof Date) {
     return new Date(obj);
@@ -15,7 +16,7 @@ function toDate(obj, format = 'yyyy-MM-dd') {
 
 /**
  * 日期转为字符串
-*/
+ */
 function dateToString(date, format = 'yyyy-MM-dd') {
   const d = toDate(date, format);
   let result = format;
@@ -41,7 +42,7 @@ function dateToString(date, format = 'yyyy-MM-dd') {
 
 /**
  * 日期转为字符串
-*/
+ */
 function stringToDate(str, format = 'yyyy-MM-dd') {
   let args = [/y+/, /M+/, /d+/, /h+/, /m+/, /s+/];
   args = args.reduce(function (re, reg, index) {
@@ -50,17 +51,17 @@ function stringToDate(str, format = 'yyyy-MM-dd') {
     if (!match) return re.concat([defaultValue]);
     const flag = match.index;
     let num = Number(str.slice(flag).match(/\d+/));
-    if (index === 1) num -= 1;  // 月份有别
+    if (index === 1) num -= 1; // 月份有别
     return re.concat([num]);
   }, []);
   args.unshift(null);
   // eslint-disable-next-line new-parens
-  return new (Date.bind.apply(Date, args));
+  return new(Date.bind.apply(Date, args));
 }
 
 /**
  * 日期转简单对象
-*/
+ */
 function dateToObject(date) {
   date = toDate(date);
   return {
@@ -78,7 +79,7 @@ function dateToObject(date) {
 
 /**
  * 日期加减
-*/
+ */
 function addDate(date, offset, dateType = 'date') {
   date = toDate(date);
   const _config = {
@@ -98,7 +99,7 @@ function addDate(date, offset, dateType = 'date') {
 
 /**
  * 返回初始化日期，比如今日零时等
-*/
+ */
 function getSimpleDate(date, dateType = 'date') {
   date = toDate(date);
   const _config = {
@@ -124,7 +125,7 @@ function getSimpleDate(date, dateType = 'date') {
 
 /**
  * 本月多少天（注意月份为 0-11 哈）
-*/
+ */
 function getDayNumberInThisMonth(date, month, year) {
   month = (month || date.getMonth()) % 11;
   var tempYear = month / 11 >> 0; // month 可能会超出 11 则再加 1 年
@@ -136,7 +137,7 @@ function getDayNumberInThisMonth(date, month, year) {
 
 /**
  * 获取该 周/月/年 的首日
-*/
+ */
 function getFirstDate(date, dateType = 'date', offset) {
   offset = offset || 0;
   date = toDate(date);
@@ -152,7 +153,7 @@ function getFirstDate(date, dateType = 'date', offset) {
 /**
  * 获取两日期间所有日期的数组
  * 注意小时分数等会影响计算，最好用 getSimpleDate
-*/
+ */
 function getArrayFromTwoDate(a, b, isSimpleDate) {
   const result = [];
   const daySecond = 24 * 60 * 60 * 1000;
@@ -172,13 +173,13 @@ function getArrayFromTwoDate(a, b, isSimpleDate) {
 /**
  * 倒计时
  * TimeCount().start(60, 1e3, (num) => console.log(60 - num), () => console.log('end'));
-*/
+ */
 function TimeCount() {
   let timer = 0, now;
   function start(target, delta, func, finish) {
     func && func(target);
     now = target;
-    timer = setInterval(function() {
+    timer = setInterval(function () {
       now = --target;
       func && func(now);
       if (now <= 0) { stop(); finish && finish(); }
@@ -195,7 +196,7 @@ function TimeCount() {
 /**
  * 获取星期几（注意周日为 0）
  * getWeekName(0, null, 1);  offset 可让 date=0 为周一
-*/
+ */
 function getWeekName(date, strType, offset) {
   let _config = '日,一,二,三,四,五,六'.split(',');
   if (strType === 1) _config = '周日,周一,周二,周三,周四,周五,周六'.split(',');

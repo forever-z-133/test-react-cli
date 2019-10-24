@@ -7,11 +7,11 @@ const { baseUrl } = config;
  * 1. 加载中 toast
  * 2. 报错 toast
  * 3. 还有一种 post
-*/
+ */
 
 /**
  * 公共请求方法
-*/
+ */
 function request(method, url, params, options = {}) {
   // 先统一化入参
   if (params === null) params = void 0;
@@ -47,10 +47,10 @@ function request(method, url, params, options = {}) {
 
 /**
  * 返回数据时拦截
-*/
+ */
 axios.interceptors.response.use(function (response) {
   const { data = {} } = response || {};
-  if (data.code) alert(data.message || "未知错误");
+  if (data.code) alert(data.message || '未知错误');
   return data;
 }, function (error) {
   // 处理统一的验证失效错误
@@ -59,9 +59,9 @@ axios.interceptors.response.use(function (response) {
     console.error('您的帐号已在其他地方登录,请重新登录');
   } else if (error.response.status === 405) {
     console.error(errorMsg || '请联系管理员确认您的权限');
-  }else if(error.response.status === 500){
-    console.error('服务器内部错误,请联系管理员');     
-  }else{
+  } else if (error.response.status === 500) {
+    console.error('服务器内部错误,请联系管理员');
+  } else {
     console.error('请联系管理员检查该问题');
   }
   return Promise.reject(error);

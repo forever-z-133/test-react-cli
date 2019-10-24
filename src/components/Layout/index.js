@@ -9,7 +9,7 @@ function Layout(props) {
   return (
     <>
       {!fixedHeader && !fixedFooter && (
-        <div className={classnames('main-container scroller', fixedType)}>
+        <div className={classnames("main-container scroller", fixedType)}>
           <div className="header">{props.header}</div>
           <div className="body">
             <div className="content">{props.children}</div>
@@ -18,7 +18,7 @@ function Layout(props) {
         </div>
       )}
       {fixedHeader && !fixedFooter && (
-        <div className={classnames('main-container flex-col', fixedType)}>
+        <div className={classnames("main-container flex-col", fixedType)}>
           <div className="header">{props.header}</div>
           <div className="body grow scroller">
             <div className="content">{props.children}</div>
@@ -27,7 +27,7 @@ function Layout(props) {
         </div>
       )}
       {!fixedHeader && fixedFooter && (
-        <div className={classnames('main-container flex-col', fixedType)}>
+        <div className={classnames("main-container flex-col", fixedType)}>
           <div className="body grow scroller">
             <div className="header">{props.header}</div>
             <div className="content">{props.children}</div>
@@ -36,7 +36,7 @@ function Layout(props) {
         </div>
       )}
       {fixedHeader && fixedFooter && (
-        <div className={classnames('main-container flex-col', fixedType)}>
+        <div className={classnames("main-container flex-col", fixedType)}>
           <div className="header">{props.header}</div>
           <div className="body grow scroller">
             <div className="content">{props.children}</div>

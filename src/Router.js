@@ -1,5 +1,5 @@
-import React, { lazy, Suspense } from "react";
-import { HashRouter, Switch, Route, Link } from "react-router-dom";
+import React, { lazy, Suspense } from 'react';
+import { HashRouter, Switch, Route, Link } from 'react-router-dom';
 import NotMatch from 'components/NotMatch/index';
 import ErrorPage from 'components/ErrorPage/index';
 const Home = lazy(() => import('routes/Home/index'));

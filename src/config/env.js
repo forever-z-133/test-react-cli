@@ -11,7 +11,7 @@ const pre = {
 };
 
 const prd = {
-  baseUrl: 'http://www.dfth.com/',
+  baseUrl: 'http://pandatest.dfth.com/',
 };
 
 export default { sat, uat, pre, prd }
