@@ -5,9 +5,9 @@ import { HashRouter, Switch, Route } from 'react-router-dom';
 import NotMatch from 'components/NotMatch/index';
 import ErrorPage from 'components/ErrorPage/index';
 // 异步加载组件（注：写法与同步的完全不一样）
-const Home = lazy(() => import('routes/Home/index'));
-const About = lazy(() => import('routes/About/index'));
-const Dashboard = lazy(() => import('routes/Dashboard/index'));
+const Home = lazy(() => import('pages/Home/index'));
+const About = lazy(() => import('pages/About/index'));
+const Dashboard = lazy(() => import('pages/Dashboard/index'));
 
 export default function Router(props) {
   return (
