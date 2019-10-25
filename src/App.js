@@ -2,8 +2,7 @@ import React from 'react';
 import Router from './Router';
 import Layout from './components/Layout';
 
-import api from 'utils/api';
-const { login, getUser } = api;
+import { login, getUser } from 'utils/api';
 
 (async function() {
   const res = await login({

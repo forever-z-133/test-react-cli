@@ -1,10 +1,9 @@
-import utils from 'utils/index';
-const { typeOf } = utils;
+import { typeOf } from 'utils/index';
 
 /**
  * 日期转为字符串
  */
-function toDate(obj, format = 'yyyy-MM-dd') {
+export const toDate = (obj, format = 'yyyy-MM-dd') => {
   if (obj instanceof Date) {
     return new Date(obj);
   } else if (typeof obj === 'string') {
@@ -17,7 +16,7 @@ function toDate(obj, format = 'yyyy-MM-dd') {
 /**
  * 日期转为字符串
  */
-function dateToString(date, format = 'yyyy-MM-dd') {
+export const dateToString = (date, format = 'yyyy-MM-dd') => {
   const d = toDate(date, format);
   let result = format;
   const _config = {
@@ -43,7 +42,7 @@ function dateToString(date, format = 'yyyy-MM-dd') {
 /**
  * 日期转为字符串
  */
-function stringToDate(str, format = 'yyyy-MM-dd') {
+export const stringToDate = (str, format = 'yyyy-MM-dd') => {
   let args = [/y+/, /M+/, /d+/, /h+/, /m+/, /s+/];
   args = args.reduce(function (re, reg, index) {
     const match = format.match(reg);
@@ -62,7 +61,7 @@ function stringToDate(str, format = 'yyyy-MM-dd') {
 /**
  * 日期转简单对象
  */
-function dateToObject(date) {
+export const dateToObject = (date) => {
   date = toDate(date);
   return {
     year: date.getFullYear(),
@@ -80,7 +79,7 @@ function dateToObject(date) {
 /**
  * 日期加减
  */
-function addDate(date, offset, dateType = 'date') {
+export const addDate = (date, offset, dateType = 'date') => {
   date = toDate(date);
   const _config = {
     'year': 'FullYear',
@@ -100,7 +99,7 @@ function addDate(date, offset, dateType = 'date') {
 /**
  * 返回初始化日期，比如今日零时等
  */
-function getSimpleDate(date, dateType = 'date') {
+export const getSimpleDate = (date, dateType = 'date') => {
   date = toDate(date);
   const _config = {
     'year': '1000000',
@@ -126,7 +125,7 @@ function getSimpleDate(date, dateType = 'date') {
 /**
  * 本月多少天（注意月份为 0-11 哈）
  */
-function getDayNumberInThisMonth(date, month, year) {
+export const getDayNumberInThisMonth = (date, month, year) => {
   month = (month || date.getMonth()) % 11;
   var tempYear = month / 11 >> 0; // month 可能会超出 11 则再加 1 年
   year = (year || date.getFullYear()) + tempYear;
@@ -138,7 +137,7 @@ function getDayNumberInThisMonth(date, month, year) {
 /**
  * 获取该 周/月/年 的首日
  */
-function getFirstDate(date, dateType = 'date', offset) {
+export const getFirstDate = (date, dateType = 'date', offset) => {
   offset = offset || 0;
   date = toDate(date);
   if (dateType !== 'week') {
@@ -154,7 +153,7 @@ function getFirstDate(date, dateType = 'date', offset) {
  * 获取两日期间所有日期的数组
  * 注意小时分数等会影响计算，最好用 getSimpleDate
  */
-function getArrayFromTwoDate(a, b, isSimpleDate) {
+export const getArrayFromTwoDate = (a, b, isSimpleDate) => {
   const result = [];
   const daySecond = 24 * 60 * 60 * 1000;
   let start = Math.min(a, b);
@@ -174,12 +173,12 @@ function getArrayFromTwoDate(a, b, isSimpleDate) {
  * 倒计时
  * TimeCount().start(60, 1e3, (num) => console.log(60 - num), () => console.log('end'));
  */
-function TimeCount() {
+export const TimeCount = () => {
   let timer = 0, now;
   function start(target, delta, func, finish) {
     func && func(target);
     now = target;
-    timer = setInterval(function () {
+    timer = setInterval(() => {
       now = --target;
       func && func(now);
       if (now <= 0) { stop(); finish && finish(); }
@@ -197,13 +196,13 @@ function TimeCount() {
  * 获取星期几（注意周日为 0）
  * getWeekName(0, null, 1);  offset 可让 date=0 为周一
  */
-function getWeekName(date, strType, offset) {
+export const getWeekName = (date, strType, offset) => {
   let _config = '日,一,二,三,四,五,六'.split(',');
   if (strType === 1) _config = '周日,周一,周二,周三,周四,周五,周六'.split(',');
-  if (strType === 2) _config = '星期日,星期一,星期二,星期三,星期四,星期五,星期六'.split(',');
-  if (strType === 3) _config = 'Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday'.split(',');
-  if (strType === 4) _config = 'Sun,Mon,Tue,Wed,Thu,Fri,Sat'.split(',');
-  if (typeOf(strType) === 'array') _config = strType;
+  else if (strType === 2) _config = '星期日,星期一,星期二,星期三,星期四,星期五,星期六'.split(',');
+  else if (strType === 3) _config = 'Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday'.split(',');
+  else if (strType === 4) _config = 'Sun,Mon,Tue,Wed,Thu,Fri,Sat'.split(',');
+  else if (typeOf(strType) === 'array') _config = strType;
 
   offset = offset || 0;
   let day = toDate(date).getDay();

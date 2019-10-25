@@ -1,7 +1,7 @@
 /**
  * 判断数据类型
  */
-function getEnv(href) {
+export const getEnv = (href) => {
   const isTest = /localhost|wxxxtsat|192\.168/i.test(href);
   const isUat = /pstest\./i.test(href);
   const isPre = /pstest\./i.test(href);
@@ -12,19 +12,19 @@ function getEnv(href) {
 /**
  * 判断数据类型
  */
-function typeOf(obj) {
+export const typeOf = (obj) => {
   let typeStr = Object.prototype.toString.call(obj).split(' ')[1];
   return typeStr.substr(0, typeStr.length - 1).toLowerCase();
 }
 
-function isType(obj, type) {
+export const isType = (obj, type) => {
   return typeOf(obj) === type;
 }
 
 /**
  * 判断对象是否为空
  */
-function isEmpty(obj) {
+export const isEmpty = (obj) => {
   if (obj === null || obj === undefined) return true;
   if (obj === '') return true;
   if (typeof obj === 'number' && isNaN(obj)) return true;
@@ -36,7 +36,7 @@ function isEmpty(obj) {
 /**
  * 自动补零
  */
-function addZero(num, len = 2) {
+export const addZero = (num, len = 2) => {
   let numLen = (num + '').length;
   while (numLen++ < len) {
     num = '0' + num;
@@ -47,7 +47,7 @@ function addZero(num, len = 2) {
 /**
  * 随机数
  */
-function random(n1, n2 = 0) {
+export const random = (n1, n2 = 0) => {
   const min = Math.min(n1, n2);
   const max = Math.max(n1, n2);
   return min + Math.random() * (max - min);
@@ -57,7 +57,7 @@ function random(n1, n2 = 0) {
  * 返回非空对象
  * returnObject({});  // null
  */
-function returnObject(obj) {
+export const returnObject = (obj) => {
   if (isEmpty(obj)) return null;
   return obj;
 }
@@ -65,7 +65,7 @@ function returnObject(obj) {
 /**
  * 返回可用数组
  */
-function returnArray(obj) {
+export const returnArray = (obj) => {
   if (typeof obj === 'string' && obj) return obj.split(',');
   if (typeOf(obj) === 'array') return obj;
   return [];
@@ -74,7 +74,7 @@ function returnArray(obj) {
 /**
  * 返回可用数字
  */
-function returnNumber(...args) {
+export const returnNumber = (...args) => {
   for (let i = 0; i < args.length; i++) {
     const item = args[i];
     const _item = parseFloat(item);
@@ -89,7 +89,7 @@ function returnNumber(...args) {
  * 2. 修复 166.665.toFixed(2) 不等于 166.67 的问题
  * 3. 返回的不再是字符串，而是数字类型
  */
-function toFixed(num, decimal, mathType) {
+export const toFixed = (num, decimal, mathType) => {
   if (isNaN(parseFloat(decimal))) throw new Error('第二位入参有误');
   if (!Math[mathType]) throw new Error('第三位入参有误');
 
@@ -105,7 +105,7 @@ function toFixed(num, decimal, mathType) {
  * 数字计算
  * 解决，1. 兼容字符串的传入 2. 小数计算的精度问题
  */
-function count(type, n1, n2) {
+export const count = (type, n1, n2) => {
   n1 = parseFloat(n1);
   n2 = parseFloat(n2);
   if (isNaN(n1) || isNaN(n2)) return NaN;
@@ -128,7 +128,7 @@ function count(type, n1, n2) {
   }
 }
 // 拓展支持多个数字的运算 countMore('+', 1, 2, 3)
-function countMore(type, options, ...nums) {
+export const countMore = (type, options, ...nums) => {
   const _startConfig = { '+': 0, '-': 0, '*': 1, '/': 1 };
   if (!(type in _startConfig)) throw new Error('首位入参有误');
   // 可能往后会加入些配置，但如果不是对象则不是配置
@@ -145,7 +145,7 @@ function countMore(type, options, ...nums) {
   return result;
 }
 // 拓展支持带符号字符串式运算 countPlus('0.1+0.2')
-function countPlus(str) {
+export const countPlus = (str) => {
   let result = str.replace(/\s/g, '');
   // 先递归处理括号内的运算
   result = result.replace(/\(([^)]*)\)/g, (match, _str) => countPlus(_str));
@@ -166,7 +166,7 @@ function countPlus(str) {
 /**
  * json 的深入遍历
  */
-function forEachDeep(json, childKey, func, indexs = [], parents = []) {
+export const forEachDeep = (json, childKey, func, indexs = [], parents = []) => {
   json.forEach((item, index) => {
     indexs.push(index);
     parents.push(item);
@@ -180,7 +180,7 @@ function forEachDeep(json, childKey, func, indexs = [], parents = []) {
 /**
  * 对象/数组的深入遍历
  */
-function forInDeep(obj, func, map = new WeakMap()) {
+export const forInDeep = (obj, func, map = new WeakMap()) => {
   if (typeOf(obj) === 'object' || typeOf(obj) === 'array') {
     let clone = Array.isArray(obj) ? [] : {};
     if (map.get(obj)) return map.get(obj);
@@ -200,7 +200,7 @@ function forInDeep(obj, func, map = new WeakMap()) {
 /**
  * 对象深拷贝
  */
-function cloneDeep(obj) {
+export const cloneDeep = (obj) => {
   return forInDeep(obj);
 }
 
@@ -208,7 +208,7 @@ function cloneDeep(obj) {
  * 对象转字符串
  * {a:1,b:2} 转为 a=1&b=2
  */
-function objectToString(obj, divide = '&', concat = '=') {
+export const objectToString = (obj, divide = '&', concat = '=') => {
   let result = [];
   for (let key in obj) {
     if (!obj.hasOwnProperty(key)) continue;
@@ -224,7 +224,7 @@ function objectToString(obj, divide = '&', concat = '=') {
  * 字符串转对象
  * a=1&b=2 转为 {a:1,b:2}
  */
-function stringToObject(str, divide = '&', concat = '=') {
+export const stringToObject = (str, divide = '&', concat = '=') => {
   if (!str || typeof str !== 'string') return {};
   const arr = str.split(divide);
   return arr.reduce((re, item) => {
@@ -244,7 +244,7 @@ function stringToObject(str, divide = '&', concat = '=') {
 /**
  * 对象深拷贝
  */
-function getDataFromUrl(name, url) {
+export const getDataFromUrl = (name, url) => {
   const obj = stringToObject((url || window.location.href).split('?')[1], /[#?&]/);
   return name ? obj[name] : obj;
 }
@@ -253,7 +253,7 @@ function getDataFromUrl(name, url) {
  * 对象深拷贝
  * addDataToUrl('x.html?a=1', {b:2}) // x.html?a=1&b=2
  */
-function addDataToUrl(url, data) {
+export const addDataToUrl = (url, data) => {
   if (!data) return url;
   const concat = /\?/.test(url) ? '&' : '?';
   if (typeof data === 'string') {
@@ -269,7 +269,7 @@ function addDataToUrl(url, data) {
  * 去抖
  * 不断操作无效，只有停止操作 delta 秒后才触发
  */
-function debounce(fn, delta, context) {
+export const debounce = (fn, delta, context) => {
   let timeoutID = null;
   return function (...args) {
     clearTimeout(timeoutID);
@@ -284,13 +284,13 @@ function debounce(fn, delta, context) {
  * 节流
  * 每隔 delta 秒时触发
  */
-function throttle(fn, delta, context) {
+export const throttle = (fn, delta, context) => {
   let safe = true;
   return function (...args) {
     if (!safe) return;
     fn.call(context, args);
     safe = false;
-    setTimeout(function () {
+    setTimeout(() => {
       safe = true;
     }, delta);
   };
@@ -299,7 +299,7 @@ function throttle(fn, delta, context) {
 /**
  * 缓存同步运算结果
  */
-function useCache(fn) {
+export const useCache = (fn) => {
   const cache = {};
   return function (...args) {
     const key = args.length + JSON.stringify(args);
