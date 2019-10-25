@@ -1,0 +1,47 @@
+/* ---------- 滚动盒子 */
+.scroller {
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ---------- 禁用 */
+.disabled {
+  pointer-events: none;
+  user-select: none;
+
+  &.gray {
+    filter: grayscale(1);
+  }
+}
+
+/* ---------- 等比例盒子 */
+.ratio {
+  position: relative;
+}
+
+.ratio::before {
+  content: '';
+  float: left;
+  padding-top: 100%;
+}
+
+.ratio::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.imgRatio {
+  position: relative;
+}
+
+.imgRatio::before {
+  content: '';
+  float: left;
+  padding-top: 100%;
+
+  &>* {
+    @extend .fitCover;
+  }
+}

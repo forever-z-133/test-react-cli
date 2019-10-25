@@ -1,0 +1,12 @@
+/* ---------- 隐式 file input */
+label.form-file {
+  position: relative;
+  vertical-align: middle;
+  overflow: hidden;
+  cursor: pointer;
+
+  &>[type="file"] {
+    position: absolute;
+    left: -999em;
+  }
+}

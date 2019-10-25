@@ -1,30 +1,20 @@
 import React, { lazy, Suspense } from 'react';
-import { HashRouter, Switch, Route, Link } from 'react-router-dom';
+import { HashRouter, Switch, Route } from 'react-router-dom';
+
+// 同步加载组件
 import NotMatch from 'components/NotMatch/index';
 import ErrorPage from 'components/ErrorPage/index';
+// 异步加载组件（注：写法与同步的完全不一样）
 const Home = lazy(() => import('routes/Home/index'));
 const About = lazy(() => import('routes/About/index'));
 const Dashboard = lazy(() => import('routes/Dashboard/index'));
 
-export default function BasicExample() {
+export default function Router(props) {
   return (
     <HashRouter>
-      <div>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/dashboard">Dashboard</Link>
-          </li>
-        </ul>
-
-        <hr />
-        <ErrorPage>
-          <Suspense fallback={<div>Loading...</div>}>
+      <ErrorPage>
+        {props.render(() => (
+          <Suspense fallback={<div className="pos-center">模块加载中...</div>}>
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/about" component={About} />
@@ -32,8 +22,8 @@ export default function BasicExample() {
               <Route component={NotMatch} />
             </Switch>
           </Suspense>
-        </ErrorPage>
-      </div>
+        ))}
+      </ErrorPage>
     </HashRouter>
   );
 }

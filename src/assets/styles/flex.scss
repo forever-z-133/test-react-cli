@@ -1,0 +1,56 @@
+/* ---------- 弹性盒子 */
+.flex-row {
+  display: flex;
+  align-items: center;
+
+  &.t {
+    align-items: flex-start;
+  }
+
+  &.s {
+    align-items: stretch;
+  }
+
+  &.b {
+    align-items: flex-end;
+  }
+
+  &.c {
+    justify-content: center;
+  }
+
+  &.r {
+    justify-content: flex-end;
+  }
+
+  &.w {
+    flex-wrap: wrap;
+  }
+
+  &>.grow {
+    flex-grow: 1;
+    overflow: hidden;
+  }
+
+  &> :not(.grow) {
+    flex-shrink: 0;
+  }
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+
+  &>.grow {
+    flex-grow: 1;
+  }
+
+  &> :not(.grow) {
+    flex-shrink: 0;
+  }
+}
+
+.flex-center {
+  @extend .flex-row;
+  @extend .flex-row.c;
+}

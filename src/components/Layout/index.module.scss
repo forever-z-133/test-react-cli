@@ -1,0 +1,6 @@
+.container {
+  &>.header,
+  &>.footer {
+    box-shadow: 0 0 0 1px #f2f2f2;
+  }
+}

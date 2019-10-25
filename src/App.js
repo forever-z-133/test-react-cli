@@ -1,10 +1,12 @@
 import React from 'react';
 import Router from './Router';
 import Layout from './components/Layout';
+import PageHeader from 'components/Layout/header';
+import PageFooter from 'components/Layout/footer';
 
 import { login, getUser } from 'utils/api';
 
-(async function() {
+(async function () {
   const res = await login({
     client_id: "1",
     client_secret: "EjKXjo27hXenF8a2MgqHvpYv7IhtJ678GfOgnHc5",
@@ -12,7 +14,7 @@ import { login, getUser } from 'utils/api';
     password: "888888",
     username: "13570240766"
   });
-  const { access_token } =  res || {};
+  const { access_token } = res || {};
   localStorage.setItem('token', access_token);
   const { data: user } = await getUser() || {};
   console.log(user);
@@ -20,9 +22,11 @@ import { login, getUser } from 'utils/api';
 
 function App() {
   return (
-    <Layout fixedFooter fixedHeader header={<p>页首</p>} footer={<p>页尾</p>}>
-      <Router />
-    </Layout>
+    <Router render={(MainPage) => (
+      <Layout fixedFooter fixedHeader header={<PageHeader />} footer={<PageFooter />}>
+        <MainPage />
+      </Layout>
+    )} />
   );
 }
 

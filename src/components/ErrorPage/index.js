@@ -23,7 +23,7 @@ class ErrorPage extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <p>页面出错啦！</p>
+        <p className="pos-center">页面出错啦，请联系管理员！</p>
       );
     }
     return this.props.children;
