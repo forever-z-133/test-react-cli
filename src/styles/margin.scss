@@ -1,10 +1,10 @@
 /* ---------- 子级间隔 */
 @for $i from 1 through 8 {
-  .gap-right-#{$i}>:not(:last-child) {
+  .gap-right-#{$i*5}>:not(:last-child) {
     margin-right: 5px * $i;
   }
 
-  .gap-bottom-#{$i}>:not(:last-child) {
+  .gap-bottom-#{$i*5}>:not(:last-child) {
     margin-bottom: 5px * $i;
   }
 }

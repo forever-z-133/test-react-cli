@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default function PageFooter() {
-  return (
-    <p>页脚</p>
-  )
+export default class PageFoot extends Component {
+  render () {
+    return (
+      <p>页脚</p>
+    )
+  }
 }

@@ -1,20 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-function PageHeader() {
-  return (
-    <ul>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-      <li>
-        <Link to="/about">About</Link>
-      </li>
-      <li>
-        <Link to="/dashboard">Dashboard</Link>
-      </li>
-    </ul>
-  )
+export default class PageHeader extends Component {
+  render() {
+    return (
+      <div className="flex-row gap-right-20">
+        <div>
+          <Link to="/home">Home</Link>
+        </div>
+        <div>
+          <Link to="/about">About</Link>
+        </div>
+        <div>
+          <Link to="/dashboard">Dashboard</Link>
+        </div>
+      </div>
+    )
+  }
 }
-
-export default PageHeader;
