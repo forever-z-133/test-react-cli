@@ -17,7 +17,7 @@ export default function Router(props) {
         {props.render(() => (
           <Suspense fallback={<div className="pos-center">模块加载中...</div>}>
             <Switch>
-              <Route exact path="/" component={Login} />
+              <Route exact path="/" component={props => <Login {...props} keepAlive />} />
               <Route path="/Home" component={Home} />
               <Route path="/about" component={About} />
               <Route path="/dashboard" component={Dashboard} />

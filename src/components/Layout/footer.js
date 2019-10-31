@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Component from 'components/index';
 
 export default class PageFoot extends Component {
   render () {

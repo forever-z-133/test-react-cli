@@ -1,6 +1,7 @@
 import React from 'react';
+import Component from 'components/index';
 
-class ErrorPage extends React.Component {
+class ErrorPage extends Component {
   constructor(props) {
     super(props);
     this.state = { hasError: false };

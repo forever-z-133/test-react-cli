@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react';
+import Component from 'components/index';
 
-class NameForm extends React.Component {
+class NameForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {value: ''};
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      value: ''
+    };
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     this.setState({value: event.target.value});
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     alert('提交的名字: ' + this.state.value);
     event.preventDefault();
   }

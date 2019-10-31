@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Component from 'components/index';
 import { Link } from 'react-router-dom';
 
 export default class PageHeader extends Component {

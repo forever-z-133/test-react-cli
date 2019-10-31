@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import Component from 'components/index';
 
 const scaleNames = {
   c: 'Celsius',
@@ -23,7 +24,7 @@ function tryConvert(temperature, convert) {
   return rounded.toString();
 }
 
-class TemperatureInput extends React.Component {
+class TemperatureInput extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -53,7 +54,7 @@ function BoilingVerdict(props) {
   return <p>The water would not boil.</p>;
 }
 
-class Calculator extends React.Component {
+class Calculator extends Component {
   constructor(props) {
     super(props);
     this.handleCelsiusChange = this.handleCelsiusChange.bind(this);

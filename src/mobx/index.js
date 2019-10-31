@@ -20,6 +20,4 @@ decorate(AppData, {
   getData: action
 });
 
-const app = new AppData();
-
-export default app;
+export default new AppData();

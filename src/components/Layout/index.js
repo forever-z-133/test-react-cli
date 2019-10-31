@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Component from 'components/index';
 import classnames from 'classnames';
 import styles from './index.module.scss';
 
