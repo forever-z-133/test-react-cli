@@ -3,19 +3,19 @@ import Component from 'components/index';
 import Form from 'components/ZYH/Form';
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
-    if (this.fromCache) return;
+  state = {
+    name: ''
+  }
+  created() {
     setTimeout(() => {
       console.log('load');
     });
   }
-  state = {
-    name: '',
-    others: { a: 1 }
-  }
   input = key => e => {
     this.setState({ [key]: e.target.value });
+  }
+  destroyed() {
+    console.log('destroyed');
   }
   render() {
     const { name } = this.state;

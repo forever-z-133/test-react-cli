@@ -3,12 +3,9 @@ import Component from 'components/index';
 import { isEmpty } from 'utils';
 
 class FormItem extends Component {
-  constructor() {
-    super();
-    this.state = {
-      message: '',
-      valid: false,
-    }
+  state = {
+    message: '',
+    valid: false,
   }
   validate = (val) => {
     const str = [val].toString();

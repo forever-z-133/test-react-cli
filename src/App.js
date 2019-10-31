@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Component from 'components/index';
 import Router from './Router';
 import Layout from './components/Layout';
 import PageHeader from 'components/Layout/header';
@@ -8,8 +9,7 @@ import { login, getUser } from 'utils/api';
 
 
 class App extends Component {
-  constructor() {
-    super();
+  created() {
     this.login();
   }
   login() {
