@@ -1,5 +1,6 @@
-import { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import classnames from 'classnames';
+import { removeNull } from 'utils/index';
 
 const getCacheWhenKeepAlive = Symbol('getCacheWhenKeepAlive');
 const setCacheWhenKeepAlive = Symbol('setCacheWhenKeepAlive');
@@ -61,6 +62,9 @@ class CommonComponent extends Component {
   getCompName() {
     return this.constructor.name;
   }
+  setRef = (name) => (ref) => {
+    this.$refs = { ...this.$refs, [name]: ref };
+  }
 
   /* keepAlive 情况下，销毁时存储数据 */
   [getCacheWhenKeepAlive]() {
@@ -77,3 +81,13 @@ class CommonComponent extends Component {
 }
 
 export default CommonComponent;
+
+export const withContext = (Component, Context) => {
+  return props => {
+    let contextProps = useContext(Context);
+    removeNull(contextProps);
+    return (
+      <Component {...props} {...contextProps} />
+    );
+  };
+}

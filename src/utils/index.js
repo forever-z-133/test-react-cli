@@ -33,6 +33,17 @@ export const isEmpty = (obj) => {
   return true;
 }
 
+export const removeNull = (obj) => {
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      const value = obj[key];
+      if (value === null || value === undefined) {
+        delete obj[key];
+      }
+    }
+  }
+}
+
 /**
  * 自动补零
  */
@@ -313,6 +324,7 @@ export default {
   typeOf,
   isType,
   isEmpty,
+  removeNull,
   addZero,
   random,
   returnObject,

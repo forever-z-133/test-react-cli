@@ -1,11 +1,15 @@
 import React from 'react';
-import Component from 'components/index';
+import Component, { withContext } from 'components/index';
+import FormContext from './FormContext';
 import { isEmpty } from 'utils';
 
 class FormItem extends Component {
   state = {
-    message: '',
     valid: false,
+    message: '',
+  }
+  mounted() {
+    console.log(this.props)
   }
   validate = (val) => {
     const str = [val].toString();
@@ -34,17 +38,15 @@ class FormItem extends Component {
   }
   render() {
     const { label } = this.props;
-    const { valid, message } = this.state;
     return (
       <div className="zyh-form-item">
         <label className="zyh-form-label">{label}</label>
-        <div className="zyh-form-control" onChange={e => this.validate(e.target.value)}>
+        <div className="zyh-form-control">
           {this.props.children}
-          {!valid && <p>{message}</p>}
         </div>
       </div>
     );
   }
 }
 
-export default FormItem;
+export default withContext(FormItem, FormContext);
