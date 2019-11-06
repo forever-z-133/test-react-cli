@@ -10,9 +10,9 @@ class Form extends Component {
     else if (typeof options === 'function') { callback = options; options = fieldNames; } // ([], func)
   }
   render() {
-    const { model, rules, children, ...rest } = this.props;
+    const { rules = {}, children, ...rest } = this.props;
     return (
-      <FormContext.Provider value={{ model, rules }} >
+      <FormContext.Provider value={{ rules }} >
         <form className="zyh-form" {...rest}>
           {children}
         </form>
