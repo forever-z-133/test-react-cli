@@ -6,7 +6,11 @@ import { isEmpty } from 'utils';
 class FormItem extends Component {
   constructor(props) {
     super(props);
-    const rule = props.rules[props.prop]; // 父级传入的验证规则
+    let {
+      prop,
+      rules = {},  // 父级而来的规则
+      addField
+    } = props;
     const {
       required = false,
       number = false,
@@ -17,8 +21,11 @@ class FormItem extends Component {
       pattern,
       validator,
       rule: meRule
-    } = this.props;
-    this.rule = { ...rule, required, number, minLength, maxLength, min, max, pattern, validator, ...meRule };
+    } = props;
+    // 本表单的验证规则
+    this.rule = { ...rules[prop], required, number, minLength, maxLength, min, max, pattern, validator, ...meRule };
+    // 把验证方法交给父级，让 $ref 可用
+    addField(prop, this.validate);
   }
   state = {
     valid: false,
