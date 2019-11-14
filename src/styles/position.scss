@@ -1,5 +1,5 @@
 /* ---------- 定位 */
-.cover {
+@mixin cover {
   position: absolute;
   top: 0;
   left: 0;
@@ -7,7 +7,7 @@
   bottom: 0;
 }
 
-.fitCover {
+@mixin fitCover {
   position: absolute;
   top: 0;
   left: 0;
@@ -16,9 +16,15 @@
   object-fit: cover;
 }
 
-.pos-center {
+@mixin pos-center {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+@mixin positionBuild {
+  .cover { @include cover; }
+  .fitCover { @include fitCover; }
+  .pos-center { @include pos-center; }
 }

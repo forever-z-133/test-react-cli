@@ -10,7 +10,7 @@ if (process.env.NODE_ENV !== 'production') {
   console.log(process.env.REACT_APP_VERSION);
 }
 
-flexable(750, 750); // 响应式，75rem = 750px
+flexable(1380, 1380); // 响应式，比如 750px = 750rem
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

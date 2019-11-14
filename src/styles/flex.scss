@@ -1,8 +1,9 @@
 /* ---------- 弹性盒子 */
-.flex-row {
+@mixin flex-row {
   display: flex;
   align-items: center;
-
+}
+@mixin flex-row-child {
   &.t {
     align-items: flex-start;
   }
@@ -37,9 +38,14 @@
   }
 }
 
-.flex-col {
+@mixin flex-col {
   display: flex;
   flex-direction: column;
+}
+@mixin flex-col-child {
+  &.b {
+    justify-content: flex-end;
+  }
 
   &>.grow {
     flex-grow: 1;
@@ -50,7 +56,17 @@
   }
 }
 
-.flex-center {
-  @extend .flex-row;
-  @extend .flex-row.c;
+@mixin flexBuild {
+  .flex-row {
+    @include flex-row;
+    @include flex-row-child;
+  }
+  .flex-col {
+    @include flex-col;
+    @include flex-col-child;
+  }
+  .flex-center {
+    @include flex-row;
+    @extend .flex-row.c;
+  }
 }

@@ -1,21 +1,26 @@
 /* ---------- 文本超出省略 */
-.textOverflow {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+@mixin textOverflow($line) {
+  @if $line == 1 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  } @else {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: $line;
+    -webkit-box-orient: vertical;
+  }
 }
 
-@mixin line-clamp($line) {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: break-all;
-  display: -webkit-box;
-  -webkit-line-clamp: $line;
-  -webkit-box-orient: vertical;
-}
-
-@for $i from 2 through 4 {
-  .textOverflow#{$i} {
-    @include line-clamp($i);
+@mixin textBuild {
+  .textOverflow {
+    @include textOverflow(1);
+  }
+  @for $i from 2 through 4 {
+    .textOverflow#{$i} {
+      @include textOverflow($i);
+    }
   }
 }

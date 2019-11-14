@@ -7,7 +7,6 @@
 function flexable(designWidth = 750, remRatio = 10) {
   function e() {
     const winW = a.getBoundingClientRect().width;
-    console.log(winW, o, d)
     r.innerText = "html{font-size:" + (a.style.fontSize = winW / o * d + "px") + " !important;}"
   }
   var t = navigator.userAgent,

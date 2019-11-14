@@ -1,0 +1,15 @@
+@import 'styles/reset.scss';
+@import 'styles/text.scss';
+@import 'styles/flex.scss';
+@import 'styles/gap.scss';
+@import 'styles/position.scss';
+@import 'styles/form.scss';
+@import 'styles/others.scss';
+
+
+@include textBuild;
+@include flexBuild;
+@include gapBuild;
+@include positionBuild;
+@include formBuild;
+@include othersBuild;

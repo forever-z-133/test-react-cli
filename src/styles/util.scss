@@ -1,0 +1,10 @@
+
+@function px($px) {
+  @return $px * 1rem;
+}
+
+@mixin this($sel) {
+  @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+    @content;
+  }
+}
