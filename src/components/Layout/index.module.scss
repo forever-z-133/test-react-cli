@@ -1,4 +1,8 @@
 .container {
+  &:not(:global(.scroller)) {
+    /* 当 footer 为纯文本时，会有 3px 超出，故而要做此处理 */
+    overflow: hidden;
+  }
   &>.header,
   &>.footer {
     box-shadow: 0 0 0 1px #f2f2f2;
