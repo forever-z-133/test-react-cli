@@ -51,11 +51,11 @@ class CommonComponent extends Component {
   destroyed() { }
 
   /* 其他公共方法 */
-  className(...args) {
+  classnames = (...args) => {
     const { className } = this.props;
     return classnames.apply(this, args.concat([className]));
   }
-  style(args) {
+  style = (args) => {
     const { style } = this.props;
     return Object.assign({}, args, style)
   }

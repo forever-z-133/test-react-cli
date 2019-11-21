@@ -1,0 +1,74 @@
+@import 'styles/common/others.scss';
+
+@mixin block {
+  display: block;
+}
+
+@mixin inline {
+  display: inline;
+}
+
+@mixin inblock {
+  display: inline-block;
+}
+
+@mixin inblock-row {
+  letter-spacing: -1em;
+
+  &>* {
+    @include inblock;
+    letter-spacing: 0;
+  }
+}
+
+@mixin float-row {
+  @include clearfix;
+
+  &>* {
+    float: left;
+  }
+}
+
+@mixin scroller($dir: y) {
+  @if ($dir==y) {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  @else {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  -webkit-overflow-scrolling: touch;
+}
+
+@mixin layoutBuild {
+  .block {
+    @include block;
+  }
+
+  .inline {
+    @include inline;
+  }
+
+  .inblock {
+    @include inblock;
+  }
+
+  .inblock-row {
+    @include inblock-row;
+  }
+
+  .float-row {
+    @include float-row;
+  }
+
+  .scroller {
+    @include scroller;
+  }
+
+  .scroller-x {
+    @include scroller(x);
+  }
+}

@@ -1,17 +1,6 @@
 /* ---------- 滚动盒子 */
 @import './position.scss';
 
-@mixin scroller($dir: y) {
-  @if ($dir == y) {
-    overflow-x: hidden;
-    overflow-y: auto;
-  } @else {
-    overflow-x: auto;
-    overflow-y: hidden;
-  }
-  -webkit-overflow-scrolling: touch;
-}
-
 /* ---------- 禁用 */
 @mixin disabled {
   pointer-events: none;
@@ -30,28 +19,51 @@
     padding-top: $ratio;
   }
 }
+
 @mixin ratio($ratio: 100%) {
   position: relative;
   @include ratioBefore($ratio);
+
   &::after {
     content: '';
     display: block;
     clear: both;
   }
 }
+
 @mixin imgRatio($ratio: 100%) {
   position: relative;
   @include ratioBefore($ratio);
+
   &>* {
     @include fitCover;
   }
 }
 
+/* ---------- 清楚浮动 */
+@mixin clearfix {
+  &::after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+}
+
 /* 导出 */
 @mixin othersBuild {
-  .scroller { @include scroller; }
-  .scroller-x { @include scroller(x); }
-  .disabled { @include disabled; }
-  .ratio { @include ratio; }
-  .imgRatio { @include imgRatio; }
+  .disabled {
+    @include disabled;
+  }
+
+  .ratio {
+    @include ratio;
+  }
+
+  .imgRatio {
+    @include imgRatio;
+  }
+
+  .clearfix {
+    @include clearfix;
+  }
 }

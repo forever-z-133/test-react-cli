@@ -1,6 +1,7 @@
 import React from 'react';
 import Component from 'components/index';
 import Form from 'components/ZYH/Form';
+import Loading from 'components/ZYH/Loading';
 
 class Login extends Component {
   state = {
@@ -8,7 +9,13 @@ class Login extends Component {
     number: 0,
     rules: {
       name: { required: true }
-    }
+    },
+    loading: true
+  }
+  mounted() {
+    setTimeout(() => {
+      this.setState({ loading: false });
+    }, 2e3);
   }
   input = key => e => {
     this.setState({ [key]: e.target.value });
@@ -19,9 +26,9 @@ class Login extends Component {
     });
   }
   render() {
-    const { name, number, rules } = this.state;
+    const { name, number, rules, loading } = this.state;
     return (
-      <>
+      <Loading loading={loading}>
         <Form ref={this.setRef('$form')} rules={rules}>
           <Form.Item label="姓名" prop="name" maxLength={1}>
             <input value={name} placeholder="请输入..." onChange={this.input('name')}></input>
@@ -34,7 +41,7 @@ class Login extends Component {
             <span>{number}</span>
           </Form.Item>
         </Form>
-      </>
+      </Loading>
     )
   }
 }

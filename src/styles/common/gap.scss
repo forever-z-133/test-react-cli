@@ -1,8 +1,11 @@
 /* ---------- 间隔 */
+@import './util.scss';
+
+$gap: px(1);
 
 /* 相互间隙 */
 @mixin child-map {
-  & > :not(:last-child) {
+  &> :not(:last-child) {
     @content;
   }
 }
@@ -10,20 +13,26 @@
 /* margin */
 @mixin margin($dir, $i, $isImportant) {
   $important: null;
+
   @if ($isImportant) {
-    $important: !important;
+    $important:  !important;
   }
+
   margin-#{$dir}: #{$i} $important;
 }
+
 @mixin marginL($i, $isImportant) {
   @include margin('left', $i, $isImportant);
 }
+
 @mixin marginR($i, $isImportant) {
   @include margin('right', $i, $isImportant);
 }
+
 @mixin marginT($i, $isImportant) {
   @include margin('top', $i, $isImportant);
 }
+
 @mixin marginB($i, $isImportant) {
   @include margin('bottom', $i, $isImportant);
 }
@@ -31,26 +40,34 @@
 /* padding */
 @mixin padding($dir, $i, $isImportant) {
   $important: null;
+
   @if ($isImportant) {
-    $important: !important;
+    $important:  !important;
   }
+
   padding-#{$dir}: #{$i} $important;
 }
 
 /* 导出结果 */
 @mixin gapBuild {
-  @each $dir in left, right, top, bottom {
+
+  @each $dir in left,
+  right,
+  top,
+  bottom {
     @for $i from 1 through 8 {
       .margin-#{$dir}-#{$i*5} {
-        @include margin($dir, $i*5rem, false);
+        @include margin($dir, $i*$gap, false);
       }
     }
   }
-  @each $dir in right, bottom {
+
+  @each $dir in right,
+  bottom {
     @for $i from 1 through 8 {
       .gap-#{$dir}-#{$i*5} {
         @include child-map {
-          @include margin($dir, $i*5rem, false);
+          @include margin($dir, $i*$gap, false);
         }
       }
     }

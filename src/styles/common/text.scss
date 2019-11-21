@@ -1,10 +1,12 @@
 /* ---------- 文本超出省略 */
 @mixin textOverflow($line) {
-  @if $line == 1 {
+  @if $line==1 {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-  } @else {
+  }
+
+  @else {
     overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-all;
@@ -18,6 +20,7 @@
   .textOverflow {
     @include textOverflow(1);
   }
+
   @for $i from 2 through 4 {
     .textOverflow#{$i} {
       @include textOverflow($i);
