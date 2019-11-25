@@ -5,7 +5,7 @@
   @include relative;
   display: inline-block;
 
-  #{&}-spin {
+  &-spin {
     @include cover;
     @include flex-center;
     background: rgba(255, 255, 255, 0.7);

@@ -25,11 +25,8 @@ export const isType = (obj, type) => {
  * 判断对象是否为空
  */
 export const isEmpty = (obj) => {
-  if (obj === null || obj === undefined) return true;
-  if (obj === '') return true;
-  if (typeof obj === 'number' && isNaN(obj)) return true;
-  for (let i in obj)
-    if (obj.hasOwnProperty(i)) return false;
+  if (isNaN(obj) || (typeof obj !== 'number' && !obj)) return true;
+  for (const key in obj) if ({}.hasOwnProperty.call(obj, key)) return false;
   return true;
 }
 
@@ -49,9 +46,7 @@ export const removeNull = (obj) => {
  */
 export const addZero = (num, len = 2) => {
   let numLen = (num + '').length;
-  while (numLen++ < len) {
-    num = '0' + num;
-  }
+  while (numLen++ < len) { num = '0' + num; }
   return num + '';
 }
 
@@ -70,6 +65,7 @@ export const random = (n1, n2 = 0) => {
  */
 export const returnObject = (obj) => {
   if (isEmpty(obj)) return null;
+  for (const key in obj) if ({}.hasOwnProperty.call(obj, key)) return obj;
   return obj;
 }
 
@@ -198,7 +194,7 @@ export const forInDeep = (obj, func, map = new WeakMap()) => {
     map.set(obj, clone);
     for (let key in obj) {
       let value = obj[key];
-      const temp = func && func(key, value, obj);
+      const temp = func && func(key, value, obj, clone);
       value = func ? (temp === void 0 ? value : temp) : value;
       clone[key] = forInDeep(value, func, map);
     }
@@ -255,8 +251,8 @@ export const stringToObject = (str, divide = '&', concat = '=') => {
 /**
  * 对象深拷贝
  */
-export const getDataFromUrl = (name, url) => {
-  const obj = stringToObject((url || window.location.href).split('?')[1], /[#?&]/);
+export const getDataFromUrl = (name, url = window.location.href) => {
+  const obj = stringToObject(url.split('?')[1], /[#?&]/);
   return name ? obj[name] : obj;
 }
 

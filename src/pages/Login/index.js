@@ -2,6 +2,7 @@ import React from 'react';
 import Component from 'components/index';
 import Form from 'components/ZYH/Form';
 import Loading from 'components/ZYH/Loading';
+import VirtualScroller from 'components/ZYH/VirtualScroller';
 
 class Login extends Component {
   state = {
@@ -41,6 +42,7 @@ class Login extends Component {
             <span>{number}</span>
           </Form.Item>
         </Form>
+        <VirtualScroller data={new Array(1e3).fill().map((x,i) => i)} style={{ maxHeight: 200 }} />
       </Loading>
     )
   }
