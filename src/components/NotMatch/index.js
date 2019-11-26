@@ -1,11 +1,9 @@
-import React from 'react';
-import Component from 'components/index';
+import React from "react";
+import Component from "components/index";
 
 class NotMatch extends Component {
   render() {
-    return (
-      <div className="pos-center">404 页面不存在</div>
-    );
+    return <div className="pos-center">404 页面不存在</div>;
   }
 }
 

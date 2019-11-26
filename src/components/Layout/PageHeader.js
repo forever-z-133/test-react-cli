@@ -1,6 +1,6 @@
-import React from 'react';
-import Component from 'components/index';
-import { Link } from 'react-router-dom';
+import React from "react";
+import Component from "components/index";
+import { Link } from "react-router-dom";
 
 export default class PageHeader extends Component {
   render() {
@@ -16,6 +16,6 @@ export default class PageHeader extends Component {
           <Link to="/dashboard">Dashboard</Link>
         </div>
       </div>
-    )
+    );
   }
 }

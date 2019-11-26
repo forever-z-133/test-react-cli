@@ -1,4 +1,3 @@
-
 /**
  * 页面响应式
  * designWidth 为设计稿尺寸
@@ -6,13 +5,15 @@
  */
 function flexable(remRatio = 75) {
   function setRem() {
-    var winW = docEl.getBoundingClientRect().width;
-    $style.innerText = "html{font-size:" + (docEl.style.fontSize = winW / remRatio + "px") + " !important;}"
+    const winW = docEl.getBoundingClientRect().width;
+    const fontSize = winW / remRatio;
+    docEl.style.fontSize = fontSize;
+    $style.innerText = `html{font-size:${fontSize}px !important;}`;
   }
-  var win = window,
-      doc = document,
-      docEl = doc.documentElement,
-      $style = doc.createElement("style");
+  const win = window,
+    doc = document,
+    docEl = doc.documentElement,
+    $style = doc.createElement("style");
   doc.head.appendChild($style);
   setRem();
   win.addEventListener("resize", setRem, !1);

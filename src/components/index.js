@@ -1,9 +1,9 @@
-import React, { Component, useContext } from 'react';
-import classnames from 'classnames';
-import { removeNull } from 'utils/index';
+import React, { Component, useContext } from "react";
+import classnames from "classnames";
+import { removeNull } from "utils/index";
 
-const getCacheWhenKeepAlive = Symbol('getCacheWhenKeepAlive');
-const setCacheWhenKeepAlive = Symbol('setCacheWhenKeepAlive');
+const getCacheWhenKeepAlive = Symbol("getCacheWhenKeepAlive");
+const setCacheWhenKeepAlive = Symbol("setCacheWhenKeepAlive");
 
 const keepAliveCache = {}; // 当有 keepAlive 时存储数据
 const createFlag = {}; // 是否已创建，等于每个组件只会运行一次 created
@@ -32,7 +32,7 @@ class CommonComponent extends Component {
   }
   componentDidUpdate() {
     this.beforeUpdate();
-    this.updated()
+    this.updated();
   }
   componentWillUnmount() {
     this.beforeDestroy();
@@ -41,30 +41,30 @@ class CommonComponent extends Component {
   }
 
   /* 生命周期函数重命名 */
-  beforeCreate() { }
-  created() { }
-  beforeMount() { }
-  mounted() { }
-  beforeUpdate() { }
-  updated() { }
-  beforeDestroy() { }
-  destroyed() { }
+  beforeCreate() {}
+  created() {}
+  beforeMount() {}
+  mounted() {}
+  beforeUpdate() {}
+  updated() {}
+  beforeDestroy() {}
+  destroyed() {}
 
   /* 其他公共方法 */
   classnames = (...args) => {
     const { className } = this.props;
     return classnames.apply(this, args.concat([className]));
-  }
-  style = (args) => {
+  };
+  style = args => {
     const { style } = this.props;
-    return Object.assign({}, args, style)
-  }
+    return Object.assign({}, args, style);
+  };
   getCompName() {
     return this.constructor.name;
   }
-  setRef = (name) => (ref) => {
+  setRef = name => ref => {
     this.$refs = { ...this.$refs, [name]: ref };
-  }
+  };
 
   /* keepAlive 情况下，销毁时存储数据 */
   [getCacheWhenKeepAlive]() {
@@ -86,8 +86,6 @@ export const withContext = (Component, Context) => {
   return props => {
     let contextProps = useContext(Context);
     removeNull(contextProps);
-    return (
-      <Component {...props} {...contextProps} />
-    );
+    return <Component {...props} {...contextProps} />;
   };
-}
+};

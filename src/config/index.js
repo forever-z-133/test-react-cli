@@ -1,8 +1,8 @@
-import env from 'config/env';
+import env from "config/env";
 
 // 接口与本站链接前缀
-let baseUrl = '';
-if (process.env.NODE_ENV === 'production') {
+let baseUrl = "";
+if (process.env.NODE_ENV === "production") {
   baseUrl = env.prd.baseUrl;
 } else {
   baseUrl = env.sat.baseUrl;
@@ -10,4 +10,4 @@ if (process.env.NODE_ENV === 'production') {
 
 export default {
   baseUrl
-}
+};
