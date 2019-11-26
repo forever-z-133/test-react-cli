@@ -1,31 +1,62 @@
-$blue: #007bff;
-$indigo: #6610f2;
-$purple: #6f42c1;
-$pink: #e83e8c;
-$red: #dc3545;
-$orange: #fd7e14;
-$yellow: #ffc107;
-$green: #28a745;
-$teal: #20c997;
-$cyan: #17a2b8;
-$white: #fff;
-$gray: #6c757d;
-$gray-dark: #343a40;
+@import './util.scss';
+
 $primary: #007bff;
 $secondary: #6c757d;
 $success: #28a745;
 $info: #17a2b8;
 $warning: #ffc107;
 $danger: #dc3545;
-$light: #f8f9fa;
-$dark: #343a40;
-$breakpoint-xs: 0;
-$breakpoint-sm: 576px;
-$breakpoint-md: 768px;
-$breakpoint-lg: 992px;
-$breakpoint-xl: 1200px;
+
+$black: #000;
+$white: #fff;
+$gray: #6c757d;
+$gray-dark: #343a40;
+
+$text-color: fade($black, 65%);
+$text-color-secondary: fade($black, 45%);
+$text-color-inverse: $white;
+$text-color-dark: fade($white, 85%);
+$text-color-secondary-dark: fade($white, 65%);
+
+$border-radius-base: px(4);
+$border-radius-sm: px(2);
+
 $font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
   "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
   "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 $font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
   "Liberation Mono", "Courier New", monospace;
+
+$border-color-base: #ebebeb;
+$border-color-split: #dcdfe6;
+$border-color-inverse: $white;
+$border-width-base: 1px;
+$border-style-base: solid;
+
+$shadow-color: rgba(0, 0, 0, 0.15);
+$shadow-1-up: 0 -2px 8px $shadow-color;
+$shadow-1-down: 0 2px 8px $shadow-color;
+$shadow-1-left: -2px 0 8px $shadow-color;
+$shadow-1-right: 2px 0 8px $shadow-color;
+$shadow: 0 4px 12px $shadow-color;
+
+$breakpoint-xs: 0;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+$ease-base-out: cubic-bezier(0.7, 0.3, 0.1, 1);
+$ease-base-in: cubic-bezier(0.9, 0, 0.3, 0.7);
+$ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+$ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+$ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+$ease-out-back: cubic-bezier(0.12, 0.4, 0.29, 1.46);
+$ease-in-back: cubic-bezier(0.71, -0.46, 0.88, 0.6);
+$ease-in-out-back: cubic-bezier(0.71, -0.46, 0.29, 1.46);
+$ease-out-circ: cubic-bezier(0.08, 0.82, 0.17, 1);
+$ease-in-circ: cubic-bezier(0.6, 0.04, 0.98, 0.34);
+$ease-in-out-circ: cubic-bezier(0.78, 0.14, 0.15, 0.86);
+$ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+$ease-in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+$ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1);

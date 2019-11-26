@@ -16,4 +16,10 @@ function DefaultLayout(props) {
   );
 }
 
+// 没有默认布局的 layout
+function NoneLayout(props) {
+  return <>{props.children}</>;
+}
+
+DefaultLayout.NoneLayout = NoneLayout;
 export default DefaultLayout;

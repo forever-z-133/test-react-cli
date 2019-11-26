@@ -1,15 +1,68 @@
+@import "styles/common/theme.scss";
+
 .zyh-divider {
   position: relative;
-  &-center {
-  }
-  &-left {
-  }
-  &-right {
+  &-horizontal,
+  &-vertical {
+    background-color: $border-color-split;
   }
   &-horizontal {
+    height: 1px;
+    clear: both;
   }
   &-vertical {
+    display: inline-block;
+    vertical-align: middle;
+    width: 1px;
+    height: 0.8em;
+    margin-top: -.2em;
+    background-color: $border-color-split;
   }
+  /** vertical 的方案二，还不清楚选哪个 */
+  // &-vertical {
+  //   display: inline;
+  //   margin: 0 10px;
+  //   &::before {
+  //     content: "";
+  //     position: absolute;
+  //     top: 0.3em;
+  //     width: 1px;
+  //     height: 0.85em;
+  //     background-color: $border-color-split;
+  //   }
+  // }
+
   &-dashed {
+    background-color: transparent;
+    background-image: linear-gradient(to right, #dcdfe6 50%, transparent 50%);
+    background-size: 10px 1px;
+    background-repeat: repeat;
+  }
+
+  &-wrap {
+    display: table;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    & > .zyh-divider-text {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+  &-wrap::before,
+  &-wrap::after {
+    content: "";
+    display: table-cell;
+    width: 50%;
+    transform: translateY(50%);
+    border-top: 1px solid $border-color-split;
+  }
+  &-left::before,
+  &-right::after {
+    width: 10%;
+  }
+  &-left::after,
+  &-right::before {
+    width: 90%;
   }
 }

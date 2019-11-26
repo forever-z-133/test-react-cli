@@ -13,16 +13,19 @@ class Divider extends Component {
       ...rest
     } = this.props;
     const prefix = "zyh-divider";
+    // 注1：vertical 下不支持 dashed
+    // 注2：vertical 下不支持内容
+    const canWrap = !!children && type !== "vertical";
     const classString = classnames(
-      prefixClass(prefix, ["", align, type]),
+      prefixClass(prefix, ["", align, canWrap ? "wrap" : type]),
       className,
       {
-        [`${prefix}-dashed`]: !!dashed
+        [`${prefix}-dashed`]: !!dashed && !canWrap
       }
     );
     return (
       <div className={classString} {...rest} role="separator">
-        {children && <span className="zyh-divider-text">{children}</span>}
+        {canWrap && <span className="zyh-divider-text">{children}</span>}
       </div>
     );
   }

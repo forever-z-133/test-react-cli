@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import DefaultLayout from "components/Layout/index";
+const { NoneLayout } = DefaultLayout;
 
 const Login = lazy(() => import("pages/Login/index"));
 const Home = lazy(() => import("pages/Home/index"));
@@ -14,7 +15,10 @@ const routeConfig = [
 ];
 
 routeConfig.forEach(item => {
-  item.Layout = item.Layout || DefaultLayout;
+  let { Layout } = item;
+  if (Layout === "none") Layout = NoneLayout;
+  else if (!Layout) Layout = DefaultLayout;
+  item.Layout = Layout;
 });
 
 export default routeConfig;

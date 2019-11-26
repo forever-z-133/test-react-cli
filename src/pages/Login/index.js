@@ -48,7 +48,20 @@ class Login extends Component {
             <span>{number}</span>
           </Form.Item>
         </Form>
-        <Divider />
+        <div className="gap-bottom-10 margin-top-10">
+          <Divider />
+          <Divider dashed />
+          <div className="gap-right-10">
+            <span>1</span>
+            <Divider type="vertical" />
+            <span>2</span>
+            <Divider type="vertical" dashed />
+            <span>3</span>
+          </div>
+          <Divider>中间</Divider>
+          <Divider align="left">左边</Divider>
+          <Divider align="right">右边</Divider>
+        </div>
         <Loading loading={loading}>
           <VirtualScroller
             data={new Array(1e3).fill().map((x, i) => i)}
