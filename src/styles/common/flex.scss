@@ -61,12 +61,12 @@
     @include flex-row-wrap;
   }
 
-  &>.grow {
+  & > .grow {
     flex-grow: 1;
     overflow: hidden;
   }
 
-  &> :not(.grow) {
+  & > :not(.grow) {
     flex-shrink: 0;
   }
 }
@@ -89,11 +89,11 @@
     @include flex-col-bottom;
   }
 
-  &>.grow {
+  & > .grow {
     flex-grow: 1;
   }
 
-  &> :not(.grow) {
+  & > :not(.grow) {
     flex-shrink: 0;
   }
 }

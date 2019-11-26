@@ -1,14 +1,13 @@
-@import 'styles/common/reset.scss';
-@import 'styles/common/theme.scss';
-@import 'styles/common/util.scss';
-@import 'styles/common/text.scss';
-@import 'styles/common/flex.scss';
-@import 'styles/common/layout.scss';
-@import 'styles/common/gap.scss';
-@import 'styles/common/position.scss';
-@import 'styles/common/form.scss';
-@import 'styles/common/others.scss';
-
+@import "styles/common/reset.scss";
+@import "styles/common/theme.scss";
+@import "styles/common/util.scss";
+@import "styles/common/text.scss";
+@import "styles/common/flex.scss";
+@import "styles/common/layout.scss";
+@import "styles/common/gap.scss";
+@import "styles/common/position.scss";
+@import "styles/common/form.scss";
+@import "styles/common/others.scss";
 
 @include textBuild;
 @include flexBuild;

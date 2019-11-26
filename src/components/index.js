@@ -55,6 +55,15 @@ class CommonComponent extends Component {
     const { className } = this.props;
     return classnames.apply(this, args.concat([className]));
   };
+  // ('.xb', ['', 'x']) 转为 { 'xb': true, 'xb-x': true }
+  prefixClass = (prefix, arr) => {
+    if (!arr || !arr.length) return prefix;
+    return arr.reduce((re, name) => {
+      const concat = prefix && name ? "-" : "";
+      re[prefix + concat + name] = true;
+      return re;
+    }, {});
+  };
   style = args => {
     const { style } = this.props;
     return Object.assign({}, args, style);

@@ -1,13 +1,19 @@
-@import 'styles//common/position.scss';
-@import 'styles//common/flex.scss';
+@import "styles//common/position.scss";
+@import "styles//common/flex.scss";
 
 .zyh-loading {
   @include relative;
-  display: inline-block;
 
   &-spin {
     @include cover;
     @include flex-center;
+  }
+  &-light > &-spin {
+    color: #333;
     background: rgba(255, 255, 255, 0.7);
+  }
+  &-dark > &-spin {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.7);
   }
 }

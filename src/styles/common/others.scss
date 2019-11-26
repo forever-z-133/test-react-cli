@@ -1,5 +1,5 @@
 /* ---------- 滚动盒子 */
-@import './position.scss';
+@import "./position.scss";
 
 /* ---------- 禁用 */
 @mixin disabled {
@@ -14,7 +14,7 @@
 /* ---------- 等比例盒子 */
 @mixin ratioBefore($ratio: 100%) {
   &::before {
-    content: '';
+    content: "";
     float: left;
     padding-top: $ratio;
   }
@@ -25,7 +25,7 @@
   @include ratioBefore($ratio);
 
   &::after {
-    content: '';
+    content: "";
     display: block;
     clear: both;
   }
@@ -35,7 +35,7 @@
   position: relative;
   @include ratioBefore($ratio);
 
-  &>* {
+  & > * {
     @include fitCover;
   }
 }

@@ -1,8 +1,6 @@
 import React from "react";
 import Component from "components/index";
-import Form from "components/ZYH/Form";
-import Loading from "components/ZYH/Loading";
-import VirtualScroller from "components/ZYH/VirtualScroller";
+import { Form, Loading, VirtualScroller, Divider } from "components/ZYH/index";
 
 class Login extends Component {
   state = {
@@ -15,7 +13,7 @@ class Login extends Component {
   };
   mounted() {
     setTimeout(() => {
-      this.setState({ loading: false });
+      // this.setState({ loading: false });
     }, 2e3);
   }
   input = key => e => {
@@ -29,7 +27,7 @@ class Login extends Component {
   render() {
     const { name, number, rules, loading } = this.state;
     return (
-      <Loading loading={loading}>
+      <>
         <Form ref={this.setRef("$form")} rules={rules}>
           <Form.Item label="姓名" prop="name" maxLength={1}>
             <input
@@ -50,11 +48,14 @@ class Login extends Component {
             <span>{number}</span>
           </Form.Item>
         </Form>
-        <VirtualScroller
-          data={new Array(1e3).fill().map((x, i) => i)}
-          style={{ maxHeight: 200 }}
-        />
-      </Loading>
+        <Divider />
+        <Loading loading={loading}>
+          <VirtualScroller
+            data={new Array(1e3).fill().map((x, i) => i)}
+            style={{ height: 200 }}
+          />
+        </Loading>
+      </>
     );
   }
 }

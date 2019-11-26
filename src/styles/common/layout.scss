@@ -1,4 +1,4 @@
-@import 'styles/common/others.scss';
+@import "styles/common/others.scss";
 
 @mixin block {
   display: block;
@@ -15,7 +15,7 @@
 @mixin inblock-row {
   letter-spacing: -1em;
 
-  &>* {
+  & > * {
     @include inblock;
     letter-spacing: 0;
   }
@@ -24,7 +24,7 @@
 @mixin float-row {
   @include clearfix;
 
-  &>* {
+  & > * {
     float: left;
   }
 }
@@ -33,9 +33,7 @@
   @if ($dir==y) {
     overflow-x: hidden;
     overflow-y: auto;
-  }
-
-  @else {
+  } @else {
     overflow-x: auto;
     overflow-y: hidden;
   }
