@@ -5,6 +5,7 @@ import Modal from "./Modal";
 import Notice from "./Notice";
 import Popover from "./Popover";
 import Tabs from "./Tabs";
+import Transition from "./Transition";
 import VirtualScroller from "./VirtualScroller";
 
 export {
@@ -15,5 +16,6 @@ export {
   Notice,
   Popover,
   Tabs,
+  Transition,
   VirtualScroller
 };

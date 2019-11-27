@@ -2,10 +2,10 @@ import React from "react";
 import Component from "components/index";
 
 class TabPane extends Component {
+  prefix = "zyh-tabs-pane";
   render() {
-    const { classnames, prefixClass } = this;
+    const { prefix, classnames, prefixClass } = this;
     const { children, className, ...rest } = this.props;
-    const prefix = "zyh-tabs-pane";
     const classString = classnames(prefixClass(prefix, [""]), className);
     return (
       <div className={classString} {...rest}>

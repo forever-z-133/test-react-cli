@@ -2,8 +2,9 @@ import React from "react";
 import Component from "components/index";
 
 class Loading extends Component {
+  prefix = "zyh-loading";
   render() {
-    const { classnames, prefixClass } = this;
+    const { prefix, classnames, prefixClass } = this;
     const {
       loading,
       children,
@@ -13,9 +14,8 @@ class Loading extends Component {
       className = "",
       ...rest
     } = this.props;
-    const prefix = "zyh-loading";
     const classString = classnames(prefixClass(prefix, ["", skin]), className);
-    if (!loading) return children;
+    if (!loading) return <>children</>;
     return (
       <div className={classString} {...rest}>
         {children}

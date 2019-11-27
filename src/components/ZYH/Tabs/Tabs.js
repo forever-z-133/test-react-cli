@@ -37,7 +37,10 @@ class Tabs extends Component {
   render() {
     const { prefix, classnames, prefixClass } = this;
     const { active } = this.state;
-    const { sider, children, className, ...rest } = this.props;
+    const { sider, className, ...rest } = this.props;
+    let { children } = this.props;
+    
+    if (!Array.isArray(children)) children = [children];
 
     const classString = classnames(prefixClass(prefix, [""]), className);
     const classString_nav = classnames(prefixClass(prefix, ["nav"]));
@@ -47,12 +50,12 @@ class Tabs extends Component {
 
     const penes = [];
     const tabs = [];
-    children.forEach(child => {
+    children.forEach((child, index) => {
       const { name } = child.props;
       let { tab } = child.props;
       if (name === active) penes.push(child);
       if (typeof tab === "string") tab = <>{tab}</>;
-      tabs.push({ tab, key: name });
+      tabs.push({ tab, key: name || index });
     });
 
     const { TabItem } = this;

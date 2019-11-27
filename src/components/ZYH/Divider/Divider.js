@@ -2,8 +2,9 @@ import React from "react";
 import Component from "components/index";
 
 class Divider extends Component {
+  prefix = "zyh-divider";
   render() {
-    const { classnames, prefixClass } = this;
+    const { prefix, classnames, prefixClass } = this;
     const {
       dashed = false,
       align = "",
@@ -12,10 +13,10 @@ class Divider extends Component {
       children,
       ...rest
     } = this.props;
-    const prefix = "zyh-divider";
     // 注1：vertical 下不支持 dashed
     // 注2：vertical 下不支持内容
     const canWrap = !!children && type !== "vertical";
+
     const classString = classnames(
       prefixClass(prefix, ["", align, canWrap ? "wrap" : type]),
       className,
@@ -23,9 +24,11 @@ class Divider extends Component {
         [`${prefix}-dashed`]: !!dashed && !canWrap
       }
     );
+    const classString_text = classnames(prefixClass(prefix, ["text"]));
+
     return (
       <div className={classString} {...rest} role="separator">
-        {canWrap && <span className="zyh-divider-text">{children}</span>}
+        {canWrap && <span className={classString_text}>{children}</span>}
       </div>
     );
   }

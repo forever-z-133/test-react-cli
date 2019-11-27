@@ -2,10 +2,10 @@ import React from "react";
 import Component from "components/index";
 
 class Notice extends Component {
+  prefix = "zyh-notice";
   render() {
-    const { classnames, prefixClass } = this;
+    const { prefix, classnames, prefixClass } = this;
     const { children, className, ...rest } = this.props;
-    const prefix = "zyh-notice";
     const classString = classnames(prefixClass(prefix, [""]), className);
     return (
       <div className={classString} {...rest}>
