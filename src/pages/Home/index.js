@@ -1,18 +1,28 @@
 import React from "react";
 import Component from "components/index";
+import { Tabs } from "components/ZYH";
+
 import { observer } from "mobx-react";
 import app from "mobx/index";
 
-// 附件
 import logo from "assets/logo.svg";
 
+const { TabPane } = Tabs;
+
 class Home extends Component {
-  throwError = () => {
-    throw new Error("xx");
+  state = {
+    tabs: new Array(30).fill().map((x, i) => i)
+  };
+  addTab = () => {
+    const { tabs } = this.state;
+    const newTabs = tabs.concat(tabs.length);
+    this.setState({ tabs: newTabs });
   };
   render() {
     const { userInfo } = app;
     const { avatar, uname, tel } = userInfo || {};
+    const { tabs } = this.state;
+
     return (
       <div className="Home">
         <img src={logo} alt="哦豁~" width="50" />
@@ -26,17 +36,36 @@ class Home extends Component {
           </div>
         </header>
         <main>
-          <button onClick={() => app.state === "" && app.getData()}>
-            点击
-          </button>
-          {app.list.join(",")}
-          <p>{app.state}</p>
+          <section>
+            <p>mobx 取值</p>
+            <button onClick={() => app.state === "" && app.getData()}>
+              点击
+            </button>
+            {app.list.join(",")}
+            <span>{app.state}</span>
+          </section>
+          <section>
+            <p>tabs 组件</p>
+            <Tabs active="1">
+              <TabPane tab="tab 1" name="1">
+                1111111111111
+              </TabPane>
+              <TabPane tab="tab 2" name="2">
+                2222222222222222222222
+              </TabPane>
+            </Tabs>
+            <Tabs
+              active={0}
+              sider={<button onClick={this.addTab}>添加</button>}
+            >
+              {tabs.map(tab => (
+                <TabPane tab={tab} name={tab} key={tab}>
+                  {tab}
+                </TabPane>
+              ))}
+            </Tabs>
+          </section>
         </main>
-        <footer>
-          <button onClick={() => this.throwError()}>
-            直接报错(无法捕捉事件里的报错，好鸡肋)
-          </button>
-        </footer>
       </div>
     );
   }

@@ -2,6 +2,7 @@
 @mixin flex-row {
   display: flex;
   align-items: center;
+  @include flex-row-child;
 }
 
 @mixin flex-row-top {
@@ -37,35 +38,10 @@
 }
 
 @mixin flex-row-child {
-  &.t {
-    @include flex-row-top;
-  }
-
-  &.s {
-    @include flex-row-stretch;
-  }
-
-  &.b {
-    @include flex-row-bottom;
-  }
-
-  &.c {
-    @include flex-row-center;
-  }
-
-  &.r {
-    @include flex-row-right;
-  }
-
-  &.w {
-    @include flex-row-wrap;
-  }
-
   & > .grow {
     flex-grow: 1;
     overflow: hidden;
   }
-
   & > :not(.grow) {
     flex-shrink: 0;
   }
@@ -74,6 +50,7 @@
 @mixin flex-col {
   display: flex;
   flex-direction: column;
+  @include flex-col-child;
 }
 
 @mixin flex-col-bottom {
@@ -85,14 +62,9 @@
 }
 
 @mixin flex-col-child {
-  &.b {
-    @include flex-col-bottom;
-  }
-
   & > .grow {
     flex-grow: 1;
   }
-
   & > :not(.grow) {
     flex-shrink: 0;
   }
@@ -106,12 +78,31 @@
 @mixin flexBuild {
   .flex-row {
     @include flex-row;
-    @include flex-row-child;
+    &.t {
+      @include flex-row-top;
+    }
+    &.s {
+      @include flex-row-stretch;
+    }
+    &.b {
+      @include flex-row-bottom;
+    }
+    &.c {
+      @include flex-row-center;
+    }
+    &.r {
+      @include flex-row-right;
+    }
+    &.w {
+      @include flex-row-wrap;
+    }
   }
 
   .flex-col {
     @include flex-col;
-    @include flex-col-child;
+    &.b {
+      @include flex-col-bottom;
+    }
   }
 
   .flex-center {

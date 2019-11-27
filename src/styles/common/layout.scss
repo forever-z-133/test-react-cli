@@ -29,13 +29,18 @@
   }
 }
 
-@mixin scroller($dir: y) {
+@mixin scroller($dir: y, $isImportant: false) {
+  $important: null;
+  @if ($isImportant) {
+    $important: !important;
+  }
+
   @if ($dir==y) {
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow-x: hidden $important;
+    overflow-y: auto $important;
   } @else {
-    overflow-x: auto;
-    overflow-y: hidden;
+    overflow-x: auto $important;
+    overflow-y: hidden $important;
   }
 
   -webkit-overflow-scrolling: touch;

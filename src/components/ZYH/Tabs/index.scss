@@ -1,0 +1,26 @@
+@import "styles/common/gap.scss";
+@import "styles/common/flex.scss";
+@import "styles/common/layout.scss";
+@import "styles/common/theme.scss";
+
+.zyh-tabs {
+  &-nav {
+    @include flex-row;
+    @include flex-row-space;
+    @include child-gap("right", $gap);
+    padding-right: 10px;
+    border-bottom: 1px solid $border-color-base;
+  }
+  &-wrap {
+    @include flex-row;
+    @include child-gap("right", $gap);
+    @include scroller(x, true);
+  }
+  &-tab {
+    padding: 4px 10px;
+    transition: color 0.15s linear;
+    &-active {
+      color: $primary;
+    }
+  }
+}

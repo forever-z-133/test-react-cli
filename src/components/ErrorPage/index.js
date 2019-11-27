@@ -18,7 +18,7 @@ class ErrorPage extends Component {
     return { hasError: true };
   }
   componentDidCatch(error, info) {
-    console.log(error, info);
+    // console.log(error, info);
   }
 
   render() {
