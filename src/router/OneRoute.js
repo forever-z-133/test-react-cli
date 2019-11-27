@@ -1,11 +1,16 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import CheckAuth from "./CheckAuth";
 
 function OneRoute(item) {
-  const { path, Component, keepAlive = false, exact = false } = item;
-  
-  let { Layout } = item;
-  if (Layout === "none") Layout = props => <>{props.children}</>;
+  const {
+    path,
+    Component,
+    Layout,
+    keepAlive = false,
+    exact = false,
+    withAuth = true
+  } = item;
 
   return (
     <Route
@@ -13,9 +18,11 @@ function OneRoute(item) {
       path={path}
       exact={exact}
       component={props => (
-        <Layout>
-          <Component {...props} keepAlive={keepAlive} />
-        </Layout>
+        <CheckAuth withAuth={withAuth}>
+          <Layout>
+            <Component {...props} keepAlive={keepAlive} />
+          </Layout>
+        </CheckAuth>
       )}
     />
   );

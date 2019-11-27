@@ -11,10 +11,19 @@ class Home extends Component {
     throw new Error("xx");
   };
   render() {
+    const { userInfo } = app;
+    const { avatar, uname, tel } = userInfo || {};
     return (
       <div className="Home">
-        <header className="Home-header">
-          <img src={logo} className="Home-logo" alt="logo" width="200" />
+        <img src={logo} alt="哦豁~" width="50" />
+        <header className="flex-row gap-right-10">
+          <div className="left ratio" style={{ width: 100 }}>
+            <img src={avatar} alt="logo" />
+          </div>
+          <div className="right grow gap-bottom-5">
+            <p>{uname}</p>
+            <p>{tel}</p>
+          </div>
         </header>
         <main>
           <button onClick={() => app.state === "" && app.getData()}>

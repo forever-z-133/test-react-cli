@@ -8,8 +8,9 @@ const About = lazy(() => import("pages/About/index"));
 const Dashboard = lazy(() => import("pages/Dashboard/index"));
 
 const routeConfig = [
-  { path: "/", Component: Login, exact: true },
-  { path: "/home", Component: Home, keepAlive: true },
+  { path: "/", Component: Home, exact: true },
+  { path: "/login", Component: Login, keepAlive: true, withAuth: false },
+  { path: "/home", Component: Home },
   { path: "/about", Component: About },
   { path: "/dashboard", Component: Dashboard, Layout: "none" }
 ];
@@ -17,7 +18,7 @@ const routeConfig = [
 routeConfig.forEach(item => {
   let { Layout } = item;
   if (Layout === "none") Layout = NoneLayout;
-  else if (!Layout) Layout = DefaultLayout;
+  else if (!Layout || Layout === "default") Layout = DefaultLayout;
   item.Layout = Layout;
 });
 

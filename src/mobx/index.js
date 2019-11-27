@@ -1,6 +1,33 @@
 import { observable, action, decorate } from "mobx";
+import { login, getUser } from "utils/api";
 
 class AppData {
+  token = undefined;
+  userInfo = undefined;
+  userRole = undefined;
+  async getToken() {
+    const res = await login({
+      client_id: "1",
+      client_secret: "EjKXjo27hXenF8a2MgqHvpYv7IhtJ678GfOgnHc5",
+      grant_type: "password",
+      password: "888888",
+      username: "13570240766"
+    });
+    const { access_token: token, token_type } = res || {};
+    if (!token || !token_type) return;
+    localStorage.setItem("token", token);
+    this.token = token;
+    return token;
+  }
+  async getUserInfo() {
+    const { data: userInfo } = (await getUser()) || {};
+    if (!userInfo) return;
+    localStorage.setItem("userInfo", userInfo);
+    this.userInfo = userInfo;
+    return userInfo;
+  }
+
+  // 测试用的，以后删
   list = [];
   state = "";
   getData() {
@@ -15,6 +42,12 @@ class AppData {
   }
 }
 decorate(AppData, {
+  token: observable,
+  userInfo: observable,
+  getToken: action,
+  getUserInfo: action,
+
+  // 测试用的，以后删
   list: observable,
   state: observable,
   getData: action
