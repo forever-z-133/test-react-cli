@@ -1,6 +1,6 @@
 import React from "react";
 import Component from "components/index";
-import { Form, Loading, VirtualScroller, Divider } from "components/ZYH/index";
+import { Form, Loading, VirtualScroller, Divider } from "zyh";
 
 class Login extends Component {
   state = {

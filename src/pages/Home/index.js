@@ -1,6 +1,6 @@
 import React from "react";
 import Component from "components/index";
-import { Tabs, Transition } from "components/ZYH";
+import { Tabs, Transition } from "zyh";
 
 import { observer } from "mobx-react";
 import app from "mobx/index";
@@ -68,7 +68,9 @@ class Home extends Component {
           <section>
             <p>transition 组件</p>
             <Transition className="gap-right-5">
-              {tabs.map((tab, index) => <span key={index}>{tab}</span>)}
+              {tabs.map((tab, index) => (
+                <span key={index}>{tab}</span>
+              ))}
             </Transition>
           </section>
         </main>

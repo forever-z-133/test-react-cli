@@ -10,6 +10,9 @@ export default class PageHeader extends Component {
           <Link to="/home">Home</Link>
         </div>
         <div>
+          <Link to="/login">Login</Link>
+        </div>
+        <div>
           <Link to="/about">About</Link>
         </div>
         <div>
