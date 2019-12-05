@@ -6,7 +6,7 @@ import Notice from "./Notice";
 import Popover from "./Popover";
 import Tabs from "./Tabs";
 import Transition from "./Transition";
-import VirtualScroller from "./VirtualScroller";
+import ScrollView from "./ScrollView";
 
 export {
   Divider,
@@ -17,5 +17,5 @@ export {
   Popover,
   Tabs,
   Transition,
-  VirtualScroller
+  ScrollView
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import Component from "components/index";
-import { Form, Loading, VirtualScroller, Divider } from "zyh";
+import { Form, Loading, ScrollView, Divider } from "zyh";
 
 class Login extends Component {
   state = {
@@ -63,7 +63,7 @@ class Login extends Component {
           <Divider align="right">右边</Divider>
         </div>
         <Loading loading={loading}>
-          <VirtualScroller
+          <ScrollView
             data={new Array(1e3).fill().map((x, i) => i)}
             style={{ height: 200 }}
           />
