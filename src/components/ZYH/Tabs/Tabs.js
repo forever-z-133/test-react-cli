@@ -64,7 +64,7 @@ class Tabs extends Component {
       <div className={classString} {...rest}>
         <div className={classString_nav}>
           <div className={classString_wrap}>{tabs.map(TabItem)}</div>
-          <div className={classString_side}>{sider}</div>
+          {sider && <div className={classString_side}>{sider}</div>}
         </div>
         <div className={classString_panes}>{penes}</div>
       </div>
