@@ -34,6 +34,23 @@ export function divideDataForScroll($scroller, data, callback, options) {
   }
 }
 
+export function animate(start, target, duration, options = {}) {
+  let time = +new Date();
+  const every = options.every;
+  const cubicBezier = options.cubicBezier;
+  const finish = options.finish;
+
+  (function loop() {
+    const t = +new Date() - time;
+    let per = cubicBezier ? cubicBezier(t, duration) : (t / duration);
+    const res = start + per * (target - start);
+    every && every(res, per);
+    if (per >= 1) return finish && finish();
+    requestAnimationFrame(loop);
+  })();
+}
+
 export default {
-  divideDataForScroll
+  divideDataForScroll,
+  animate
 };

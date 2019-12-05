@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ScrollView } from "zyh";
-const { ReachBorder } = ScrollView;
+const { ReachBorder, PullDownRefresh } = ScrollView;
 
 const fakeData = new Array(74).fill().map((x, i) => i);
 
 export default function() {
   const [list, setList] = useState([]);
   const [state, setState] = useState("WAIT");
-  const [pageSize] = useState(20);
+  const [pageSize] = useState(15);
   const [pageNo, setPageNo] = useState(0);
 
   function handleReachBottom() {
@@ -36,24 +36,26 @@ export default function() {
     }, 1e3);
   }
 
-  handleReachBottom(pageNo + 1);
+  useEffect(() => {
+    handleReachBottom(pageNo + 1);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <section>
       <p>scroll-view 组件</p>
-      <div className="scroller-wrap" style={{ height: 300 }}>
+      <div className="scroller-wrap" style={{ height: "200px" }}>
         <ScrollView className="gap-right-5">
           <ReachBorder
-            lowerThreshold={20}
+            lowerThreshold={50}
             scrolltolower={handleReachBottom}
-            upperThreshold={50}
-            scrolltoupper={() => console.log("top")}
           >
-            {list.fill().map((x, i) => (
-              <div key={i}>{i}</div>
-            ))}
-            {state === 'LOADING' && <p>loading...</p>}
-            {state === 'EMPTY' && <p>到底了</p>}
+            <PullDownRefresh>
+              {list.fill().map((x, i) => (
+                <div key={i}>{i}</div>
+              ))}
+              {state === "LOADING" && <p>loading...</p>}
+              {state === "EMPTY" && <p>到底了</p>}
+            </PullDownRefresh>
           </ReachBorder>
         </ScrollView>
       </div>

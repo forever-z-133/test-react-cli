@@ -3,4 +3,13 @@
 .zyh-scroll-view {
   max-height: 100%;
   @include scroller;
+  &-pullDown {
+    position: relative;
+    &-comp {
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+      right: 0;
+    }
+  }
 }
