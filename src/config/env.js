@@ -14,4 +14,5 @@ const prd = {
   baseUrl: "http://pandatest.dfth.com/"
 };
 
-export default { sat, uat, pre, prd };
+export const env = { sat, uat, pre, prd };
+export default env;

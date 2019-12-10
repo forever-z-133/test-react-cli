@@ -1,5 +1,5 @@
 import React from "react";
-import { Transition } from "zyh";
+import { Transition } from "components/ZYH";
 
 export default function() {
   return (

@@ -1,10 +1,10 @@
 import { observable, action, decorate } from "mobx";
-import { login, getUser } from "utils/api";
+import { login, getUser } from "api";
+import { getLocal, setLocal } from "utils";
 
 class AppData {
-  token = undefined;
-  userInfo = undefined;
-  userRole = undefined;
+  token = getLocal("token") || "";
+  userInfo = getLocal("user") || {};
   async getToken() {
     const res = await login({
       client_id: "1",
@@ -13,16 +13,17 @@ class AppData {
       password: "888888",
       username: "13570240766"
     });
-    const { access_token: token, token_type } = res || {};
-    if (!token || !token_type) return;
-    localStorage.setItem("token", token);
+    const { access_token, token_type } = res || {};
+    if (!access_token) return;
+    const token = `${token_type} ${access_token}`;
+    setLocal("token", token);
     this.token = token;
     return token;
   }
   async getUserInfo() {
     const { data: userInfo } = (await getUser()) || {};
     if (!userInfo) return;
-    localStorage.setItem("userInfo", userInfo);
+    setLocal("user", userInfo);
     this.userInfo = userInfo;
     return userInfo;
   }
@@ -41,6 +42,7 @@ class AppData {
     }, 1e3);
   }
 }
+
 decorate(AppData, {
   token: observable,
   userInfo: observable,

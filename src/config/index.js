@@ -8,6 +8,4 @@ if (process.env.NODE_ENV === "production") {
   baseUrl = env.sat.baseUrl;
 }
 
-export default {
-  baseUrl
-};
+export { baseUrl };

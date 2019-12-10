@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Tabs } from "zyh";
+import { Tabs } from "components/ZYH";
 const { TabPane } = Tabs;
 
 export default function() {

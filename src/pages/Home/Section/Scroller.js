@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView } from "zyh";
+import { ScrollView } from "components/ZYH";
 const { ReachBorder, PullDownRefresh } = ScrollView;
 
 const fakeData = new Array(74).fill().map((x, i) => i);

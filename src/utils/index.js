@@ -25,7 +25,8 @@ export function isType(obj, type) {
  * 判断对象是否为空
  */
 export function isEmpty(obj) {
-  if (isNaN(obj) || (typeof obj !== "number" && !obj)) return true;
+  if (typeof obj === 'number' && isNaN(obj)) return true;
+  if (typeof obj !== 'number' && !obj) return true;
   for (const key in obj) if ({}.hasOwnProperty.call(obj, key)) return false;
   return true;
 }
@@ -149,7 +150,7 @@ export function countMore(type, options, ...nums) {
       result = nums[0];
       continue;
     }
-    result = count(result, nums[i]);
+    result = count(type, result, nums[i]);
   }
   return result;
 }
@@ -159,7 +160,7 @@ export function countPlus(str) {
   // 先递归处理括号内的运算
   result = result.replace(/\(([^)]*)\)/g, (match, _str) => countPlus(_str));
   // 先乘除，后加减，用 exec 正则出来一个个计算并替换
-  const _numReg = "(-?[0-9]+[\\.\\e]?[0-9]*)";
+  const _numReg = "((?=\\D|^)-?[0-9]+[\\.\\e]?[0-9]*)";
   ["/*", "+-"].forEach(item => {
     item = item.replace(/(?<=\B)/g, "\\\\").slice(0, -2);
     const _reg = new RegExp(_numReg + "([" + item + "])" + _numReg);
@@ -317,29 +318,58 @@ export function useCache(fn) {
   };
 }
 
-export default {
-  getEnv,
-  typeOf,
-  isType,
-  isEmpty,
-  removeNull,
-  addZero,
-  random,
-  returnObject,
-  returnArray,
-  returnNumber,
-  toFixed,
-  count,
-  countMore,
-  countPlus,
-  forEachDeep,
-  forInDeep,
-  cloneDeep,
-  objectToString,
-  stringToObject,
-  addDataToUrl,
-  getDataFromUrl,
-  debounce,
-  throttle,
-  useCache
-};
+/**
+ * 偏函数
+ */
+function partial(func, ...rawArgs) {
+  return function(...args) {
+    return func.call(this, ...rawArgs, ...args);
+  };
+}
+
+/**
+ * json 字符串转化
+ */
+function jsonStringify(obj) {
+  if (obj === "null" || obj === "undefined") obj = "";
+  return JSON.stringify(obj);
+}
+function jsonParse(str) {
+  let value;
+  try {
+    value = JSON.parse(str);
+  } catch (err) {
+    // JSON.parse 不成功
+  }
+  if (value === "null" || value === "undefined") value = undefined;
+  return value;
+}
+
+/**
+ * 缓存相关
+ */
+function Store(type, method, key, value = "") {
+  const store = window[`${type}Storage`];
+  if (value === "null" || value === "undefined") value = "";
+  if (method === "setItem") {
+    if (value === null) value = "";
+    store.setItem(key, jsonStringify(value));
+  } else if (method === "getItem") {
+    return jsonParse(store.getItem(key));
+  } else {
+    store[method](key, value);
+  }
+}
+const LocalStore = partial(Store, "local");
+export function setLocal(key, value) {
+  return LocalStore("setItem", key, value);
+}
+export function getLocal(key) {
+  return LocalStore("getItem", key);
+}
+export function removeLocal(key) {
+  return LocalStore("removeItem", key);
+}
+export function clearLocal() {
+  return LocalStore("clear");
+}
