@@ -1,41 +1,48 @@
-import React from "react";
-import Component from "components/index";
-import FormContext from "./FormContext";
+import React from 'react';
+import Component from 'components/index';
+import FormItem from './FormItem';
+
+function FormCreate(options) {
+  return function(WrappedComponent) {
+    return class extends Component {
+      getItemProps = (name, rule) => {
+        return {
+          onInput(e) {
+            const value = e.target.value;
+            console.log(value);
+          }
+        };
+      };
+      getItemProps = name => {
+        return {
+          children: ''
+        };
+      };
+      render() {
+        const { getItemProps, getItemError } = this;
+        const { name, label, rule } = options;
+        const form = {
+          name,
+          label,
+          rule,
+          getItemProps,
+          getItemError
+        };
+        return <WrappedComponent {...form} />;
+      }
+    };
+  };
+}
+
+const FormComponet = FormCreate({
+  name: 'username',
+  label: '姓名',
+  rule: [{ required: true, message: '请输入姓名' }]
+})(FormItem);
 
 class Form extends Component {
-  fields = {};
-  validateFields = (fieldNames, options, callback) => {
-    if (typeof fieldNames === "string") {
-      fieldNames = [fieldNames];
-    } // ('name')
-    if (typeof fieldNames === "object") {
-      callback = options;
-      options = fieldNames;
-      fieldNames = [];
-    } // ({}, func)
-    else if (typeof fieldNames === "function") {
-      callback = fieldNames;
-      fieldNames = [];
-      options = undefined;
-    } // (func)
-    else if (typeof options === "function") {
-      callback = options;
-      options = fieldNames;
-    } // ([], func)
-  };
-  addField = (key, rule, callback) => {
-    this.fields[key] = rule;
-  };
   render() {
-    const { addField } = this;
-    const { rules = {}, children, ...rest } = this.props;
-    return (
-      <FormContext.Provider value={{ rules, addField }}>
-        <form className="zyh-form" {...rest}>
-          {children}
-        </form>
-      </FormContext.Provider>
-    );
+    return <FormComponet />;
   }
 }
 
